@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Light Switch</title>
+
+    <link href="../static/css/bootstrap-4.4.1.css" th:href="@{/css/bootstrap-4.4.1.css}" rel="stylesheet">
+
+</head>
+<body>
+<div class="jumbotron jumbotron-fluid text-center">
+    <h1 class="display-4">Light Switch</h1>
+    <hr class="my-4">
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" th:href="@{/light/on}" role="button">On</a>
+        <a class="btn btn-primary btn-lg" th:href="@{/light/off}" role="button">Off</a>
+        <br>
+        <label th:text="${light}"></label>
+    </p>
+</div>
+</body>
+</html>
