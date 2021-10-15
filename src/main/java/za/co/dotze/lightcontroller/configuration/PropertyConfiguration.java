@@ -7,14 +7,24 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "url")
 public class PropertyConfiguration {
 
-    private String url;
+    private String base;
+    private String light;
 
-    public String getUrl() {
-        return url;
+    public String getLight() {
+        return light;
     }
 
-    public PropertyConfiguration setUrl(String url) {
-        this.url = url;
+    public PropertyConfiguration setLight(String light) {
+        this.light = light;
+        return this;
+    }
+
+    public String getBase() {
+        return base;
+    }
+
+    public PropertyConfiguration setBase(String base) {
+        this.base = base;
         return this;
     }
 }
