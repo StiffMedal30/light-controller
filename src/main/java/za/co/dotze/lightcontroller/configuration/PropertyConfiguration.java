@@ -9,6 +9,18 @@ public class PropertyConfiguration {
 
     private String base;
     private String light;
+    private String on;
+    private String off;
+
+    public PropertyConfiguration setOn(String on) {
+        this.on = on;
+        return this;
+    }
+
+    public PropertyConfiguration setOff(String off) {
+        this.off = off;
+        return this;
+    }
 
     public String getLight() {
         return light;
