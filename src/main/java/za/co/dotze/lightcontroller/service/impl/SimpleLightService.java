@@ -1,37 +1,35 @@
 package za.co.dotze.lightcontroller.service.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import za.co.dotze.lightcontroller.exception.ConnectionFailedException;
+import org.springframework.web.client.RestTemplate;
 import za.co.dotze.lightcontroller.service.LightService;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.util.Map;
 
 @Service
 public class SimpleLightService implements LightService {
+    @Value("${url.light.off}")
+    private String urlOff;
+    @Value("${url.light.on}")
+    private String urlOn;
+    @Value("${url.light.status}")
+    private String urlStatus;
 
-    private static final Logger log = LoggerFactory.getLogger(SimpleLightService.class);
+    final RestTemplate template = new RestTemplate();
+    @Override
+    public String getStatus() {
+        final String forObject = template.getForObject(urlStatus, String.class);
+        return forObject;
+    }
 
     @Override
-    public void doSwitch(String urlString) {
-        URL url = null;
-        HttpURLConnection con = null;
-        try {
-            url = new URL(urlString);
-            con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("GET");
-            con.setRequestProperty("Accept", "application/json");
-            con.getInputStream();
-        } catch (IOException e) {
-            log.error(String.format("An error occurred: %s", e));
-            throw new ConnectionFailedException("An error occurred", e);
-        } finally {
-            if (con != null) {
-                con.disconnect();
-            }
-        }
+    public void turnOff() {
+        template.getForObject(urlOff, String.class);
+    }
+
+    @Override
+    public void turnOn() {
+        template.getForObject(urlOn, String.class);
     }
 }
